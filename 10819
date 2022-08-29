@@ -1,0 +1,57 @@
+#include <iostream>
+#include <math.h>
+#include <algorithm>
+#include <vector>
+using namespace std;
+
+
+//boj 문제 번호: 10819
+//참고 사이트: https://novlog.tistory.com/236
+//핵심 개념: next_permutation() function 
+// it is used for rearranging elements in array(or vector) into the next lexiocographically greater permutation.
+// for example,  ABCDE -> ABCED, 3412 > 3421
+
+// 코드 전략:
+// using Brute Force (Checking all cases using next_permuatation() function
+
+
+
+int factorial(int n) {
+	int value = 1;
+	for (int i = 1; i <= n; i++) {
+		value *= i;
+	}
+	return value;
+}
+
+
+int absSum(vector<int> vec, int n) {         //acquiring the summation for each eases
+	int value = 0;
+	for (int i = 0; i < n - 1; i++) {
+		value += abs(vec[i] - vec[i + 1]);
+	}
+	return value;
+}
+
+
+
+int main() {
+	int n;
+	cin >> n;
+	vector<int> vector(n);
+	
+	for (int i = 0; i < n; i++) {
+		cin >> vector[i];
+	}
+
+	int maximum_value = 0;
+
+	for (int i = 0; i < factorial(n); i++) {                 //the number of occasions are factorial(n) because it is permutation
+    maximum_value = max(maximum_value, absSum(vector, n));
+		next_permutation(vector.begin(), vector.end());         
+	}
+
+	cout << maximum_value;
+	
+
+}
